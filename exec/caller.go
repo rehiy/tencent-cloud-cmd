@@ -9,25 +9,25 @@ import (
 
 func Caller() {
 
-	ParseFlag()
-	CheckSecret()
+	flags := ParseFlag()
+	CheckSecret(flags)
 
-	if service == "" {
+	if flags.Service == "" {
 		log.Fatal("请设置 -service 参数，-h 查看帮助")
 		return
 	}
 
-	if version == "" {
+	if flags.Version == "" {
 		log.Fatal("请设置 -version 参数，-h 查看帮助")
 		return
 	}
 
-	if action == "" {
+	if flags.Action == "" {
 		log.Fatal("请设置 -action 参数，-h 查看帮助")
 		return
 	}
 
-	res, err := api.Request(service, version, action, region, payload, secretId, secretKey)
+	res, err := api.Request(flags)
 
 	if err != nil {
 		log.Fatal(err)

@@ -5,25 +5,19 @@ import (
 	"fmt"
 	"log"
 	"os"
+
+	"github.com/rehiy/tencent-cloud-cmd/api"
 )
 
-var (
-	service   string
-	version   string
-	action    string
-	region    string
-	payload   string
-	secretId  string
-	secretKey string
-)
+func ParseFlag() *api.Params {
 
-func ParseFlag() {
+	var args = api.Params{}
 
-	flag.StringVar(&service, "service", "", "服务名")
-	flag.StringVar(&version, "version", "", "服务版本")
-	flag.StringVar(&action, "action", "", "执行动作")
-	flag.StringVar(&region, "region", "", "地域")
-	flag.StringVar(&payload, "payload", "", "结构化数据")
+	flag.StringVar(&args.Service, "service", "", "服务名")
+	flag.StringVar(&args.Version, "version", "", "服务版本")
+	flag.StringVar(&args.Action, "action", "", "执行动作")
+	flag.StringVar(&args.Region, "region", "", "地域")
+	flag.StringVar(&args.Payload, "payload", "", "结构化数据")
 
 	flag.Usage = func() {
 		fmt.Fprint(os.Stderr, readme)
@@ -32,14 +26,16 @@ func ParseFlag() {
 
 	flag.Parse()
 
+	return &args
+
 }
 
-func CheckSecret() {
+func CheckSecret(args *api.Params) {
 
-	secretId, _ = os.LookupEnv("TENCENTCLOUD_SECRET_ID")
-	secretKey, _ = os.LookupEnv("TENCENTCLOUD_SECRET_KEY")
+	args.SecretId, _ = os.LookupEnv("TENCENTCLOUD_SECRET_ID")
+	args.SecretKey, _ = os.LookupEnv("TENCENTCLOUD_SECRET_KEY")
 
-	if secretId == "" || secretKey == "" {
+	if args.SecretId == "" || args.SecretKey == "" {
 		log.Fatal("请设置环境变量 TENCENTCLOUD_SECRET_ID 和 TENCENTCLOUD_SECRET_KEY")
 	}
 

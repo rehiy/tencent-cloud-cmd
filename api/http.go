@@ -8,16 +8,26 @@ import (
 	"time"
 )
 
-func Request(service, version, action, region, payload, secretId, secretKey string) (string, error) {
+type Params struct {
+	Service   string
+	Version   string
+	Action    string
+	Region    string
+	Payload   string
+	SecretId  string
+	SecretKey string
+}
+
+func Request(params *Params) (string, error) {
 
 	timestamp := time.Now().Unix()
-	host := service + ".tencentcloudapi.com"
+	host := params.Service + ".tencentcloudapi.com"
 
 	authorization := AuthCode(
-		service,
-		payload,
-		secretId,
-		secretKey,
+		params.Service,
+		params.Payload,
+		params.SecretId,
+		params.SecretKey,
 		timestamp,
 	)
 
@@ -27,16 +37,16 @@ func Request(service, version, action, region, payload, secretId, secretKey stri
 		"Authorization":  authorization,
 		"Content-Type":   "application/json; charset=utf-8",
 		"Host":           host,
-		"X-TC-Action":    action,
+		"X-TC-Action":    params.Action,
 		"X-TC-Timestamp": strconv.FormatInt(timestamp, 10),
-		"X-TC-Version":   version,
+		"X-TC-Version":   params.Version,
 	}
 
-	if region != "" {
-		headers["X-TC-Region"] = region
+	if params.Region != "" {
+		headers["X-TC-Region"] = params.Region
 	}
 
-	return httpPost("https://"+host, payload, headers)
+	return httpPost("https://"+host, params.Payload, headers)
 
 }
 
