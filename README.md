@@ -17,7 +17,7 @@ func main() {
 export TENCENTCLOUD_SECRET_ID=xxxx
 export TENCENTCLOUD_SECRET_KEY=yyyy
 
-tcapi --service cvm --version 2017-03-12 --action DescribeRegions --region ap-guangzhou --payload "{}"
+tcmd --service cvm --version 2017-03-12 --action DescribeRegions --region ap-guangzhou --payload "{}"
 ```
 
 ### Command 参数

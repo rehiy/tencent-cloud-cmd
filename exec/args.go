@@ -48,7 +48,7 @@ func CheckSecret() {
 const readme = `
 使用方法:
 
-tcapi --service cvm --version 2017-03-12 --action DescribeRegions --region ap-guangzhou --payload "{}"
+tcmd --service cvm --version 2017-03-12 --action DescribeRegions --region ap-guangzhou --payload "{}"
 
 选项说明:
 
