@@ -1,16 +1,16 @@
-package cmd
+package exec
 
 import (
 	"fmt"
 	"log"
 
-	"github.com/rehiy/tencent-cloud-api-cli/api"
+	"github.com/rehiy/tencent-cloud-cmd/api"
 )
 
-func Exec() {
+func Caller() {
 
-	parseFlag()
-	checkSecret()
+	ParseFlag()
+	CheckSecret()
 
 	if service == "" {
 		log.Fatal("请设置 -service 参数，-h 查看帮助")

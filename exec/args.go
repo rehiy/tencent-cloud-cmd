@@ -1,4 +1,4 @@
-package cmd
+package exec
 
 import (
 	"flag"
@@ -17,7 +17,7 @@ var (
 	secretKey string
 )
 
-func parseFlag() {
+func ParseFlag() {
 
 	flag.StringVar(&service, "service", "", "服务名")
 	flag.StringVar(&version, "version", "", "服务版本")
@@ -34,7 +34,7 @@ func parseFlag() {
 
 }
 
-func checkSecret() {
+func CheckSecret() {
 
 	secretId, _ = os.LookupEnv("TENCENTCLOUD_SECRET_ID")
 	secretKey, _ = os.LookupEnv("TENCENTCLOUD_SECRET_KEY")

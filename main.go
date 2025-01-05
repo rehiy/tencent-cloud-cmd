@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/rehiy/tencent-cloud-api-cli/cmd"
+	"github.com/rehiy/tencent-cloud-cmd/exec"
 )
 
 func main() {
 
-	cmd.Exec()
+	exec.Caller()
 
 }

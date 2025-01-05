@@ -1,7 +1,7 @@
 package api
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strconv"
 	"strings"
@@ -63,7 +63,7 @@ func httpPost(url, msg string, headers map[string]string) (string, error) {
 
 	defer resp.Body.Close()
 
-	if body, err = ioutil.ReadAll(resp.Body); err != nil {
+	if body, err = io.ReadAll(resp.Body); err != nil {
 		return "", err
 	}
 
