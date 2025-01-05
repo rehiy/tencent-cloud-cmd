@@ -6,8 +6,11 @@
 
 ```go
 import "github.com/rehiy/tencent-cloud-cmd/api"
+
 func main() {
-    res, err := api.Request(service, version, action, region, payload, secretId, secretKey)
+    res, err := api.Request(&api.Params{
+      // 参数表
+    })
 }
 ```
 
